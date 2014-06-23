@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @completed_assignment.user_id %>
+</p>
+
+<p>
+  <strong>Assignments:</strong>
+  <%= @completed_assignment.assignments_id %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @completed_assignment.url %>
+</p>
+
+<p>
+  <strong>Completed:</strong>
+  <%= @completed_assignment.completed %>
+</p>
+
+<%= link_to 'Edit', edit_completed_assignment_path(@completed_assignment) %> |
+<%= link_to 'Assignments', assignments_path %>

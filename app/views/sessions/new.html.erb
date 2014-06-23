@@ -1,0 +1,21 @@
+<div class="login">
+  <div class="row dialog">
+    <div class=" panel large-4 columns right">
+      <h3>Log In</h3>
+      <p id="notice"><%= notice %></p>
+      <%= form_tag sessions_path do %>
+        <div class="field">
+          <%= label_tag :email %>
+          <%= email_field_tag :email, params[:email] %>
+        </div>
+        <div class=field>
+          <%= label_tag :password %>
+          <%= password_field_tag :password, params[:password] %>
+        </div>
+        <div class="actions"><%= submit_tag "Log In" %></div>
+        <div>Don't have a user yet? Please
+          <%= link_to "Sign Up!", signup_path %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<%= form_for(@submission) do |f| %>
+  <% if @submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this completed_assignment from being saved:</h2>
+
+      <ul>
+      <% @submission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="field">
+    <%= f.hidden_field :assignments_id, value: session[:assignment_id] %>
+  </div>
+  <% if student? %>
+  <div class="field">
+    <%= f.hidden_field :user_id, value: session[:user_id] %>
+  </div>
+  <div class="field">
+    <%= f.label :url, "Github URL" %><br>
+    <%= f.url_field :url, placeholder: "Paste Github URL here" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Submit Assignment for review" %>
+  </div>
+  <% end %>
+  <% if teacher? %>
+  <div class="field">
+    <%= f.hidden_field :user_id, value: session[:student_id] %>
+  </div>
+  <div>
+    Completed to specifications? <%= f.check_box :completed %><br>
+    <%= f.submit "Approve" %>
+  </div>
+  <% end %>
+<% end %>

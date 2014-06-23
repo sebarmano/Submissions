@@ -1,0 +1,54 @@
+<div class="wall assignments">
+  <div class="row">
+    <div class="8-large comlumns">
+      <h1>Homework List</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Due</th>
+            <% if student? %>
+              <th>Status</th>
+            <% end %>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @assignments.each do |assignment| %>
+            <% if active?(assignment) || teacher? %>
+            <tr>
+              <td><%= assignment.title %></td>
+              <td><%= assignment.date %></td>
+              <td><%= assignment.due %></td>
+              <% if student? %>
+                <% if status(assignment)=="Up for review"%>
+                <td><span class="radius regular label">UP FOR REVIEW</span></td>
+                <% elsif status(assignment)=="Completed" %>
+                <td><span class="radius success label">COMPLETE</span></td>
+                <% elsif status(assignment)=="Incomplete" && past?(assignment) %>
+                <td><span class="radius alert label">INCOMPLETE</span></td>
+                <% else %>
+                <td><span class="radius secondary label">ACTIVE</span></td>
+                <% end %>
+              <% end %>
+              <td><%= link_to 'Show', assignment %></td>
+              <% if teacher? %>
+              <td><%= link_to 'Edit', edit_assignment_path(assignment) %></td>
+              <td><%= link_to 'Destroy', assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+
+      <% if teacher? %>
+        <%= link_to 'New Assignment', new_assignment_path, class: "button" %>
+      <% end %>
+    </div>
+  </div>
