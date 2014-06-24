@@ -1,2 +1,20 @@
 <h1>Submissions#edit</h1>
-<p>Find me in app/views/submissions/edit.html.erb</p>
+
+<%= form_for [@assignment, @submission] do |f| %>
+  <% if @submission.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@submission.errors.count, "error") %> prohibited this completed_assignment from being saved:</h2>
+
+      <ul>
+      <% @submission.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    Completed to specifications? <%= f.check_box :complete %><br>
+    <%= f.submit "Approve" %>
+  </div>
+<% end %>

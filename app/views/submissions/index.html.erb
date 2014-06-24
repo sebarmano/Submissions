@@ -1,0 +1,6 @@
+<% @submissions.each do |submission| %>
+<p>
+  <%=  submission.user.name %>
+  <%= link_to "Review", edit_assignment_submission_path(params[:assignment_id], submission) %>
+</p>
+<% end %>

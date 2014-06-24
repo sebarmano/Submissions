@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :completed_assignments
+  has_many :submissions
 end
