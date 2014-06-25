@@ -12,8 +12,8 @@ class AssignmentsController < ApplicationController
   # GET /assignments/1
   # GET /assignments/1.json
   def show
-    session[:assignment_id] = @assignment.id
     @students = User.where(teacher_id: session[:user_id])
+    @submission = Submission.new
 
   end
 
