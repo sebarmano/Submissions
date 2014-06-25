@@ -16,11 +16,28 @@
 
     <% if teacher? %>
       <h3>Students</h3>
-      <% @students.each do |student| %>
-         <div><%= student.name %> |
-           <%= draw_status(@assignment, student) %>
-         </div>
-      <% end %>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @students.each do |student| %>
+             <tr>
+               <td>
+                 <%= student.name %>
+               </td>
+               <td>
+                 <%= draw_status(@assignment, student) %>
+               </td>
+             </tr>
+          <% end %>
+        </tbody>
+      </table>
     <% end %>
     <p>
       <ul class="button-group">
