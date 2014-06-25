@@ -1,41 +1,45 @@
 <div class="container">
-<h1>
-  <%= @assignment.title %>
-</h1>
+    <h1>
+      <%= @assignment.title %>
+    </h1>
 
-<p>
-  <strong>Assigned:</strong>
-  <%= @assignment.date.to_formatted_s(:long_ordinal) %><br>
-  <strong>Due:</strong>
-  <%= @assignment.due.to_formatted_s(:long_ordinal) %><br>
-  <strong>Hours Until Due:</strong>
-  <%= (-(@assignment.due - DateTime.now)/3600).to_i %>
-</p>
+    <p>
+      <strong>Assigned:</strong>
+      <%= @assignment.date.to_formatted_s(:long_ordinal) %><br>
+      <strong>Due:</strong>
+      <%= @assignment.due.to_formatted_s(:long_ordinal) %><br>
+      <strong>Hours Until Due:</strong>
+      <%= ((@assignment.due - DateTime.now)/3600).to_i %>
+    </p>
 
-  <%= markdown(@assignment.description) %>
+      <%= markdown(@assignment.description) %>
 
-<% if teacher? %>
-  <h3>Students</h3>
-  <% @students.each do |student| %>
-     <div><%= student.name %> | <%= student.id %> |
-           <% if @assignment.complete?(student) %>
-             <span class="radius success label">COMPLETE</span> |
-             <%= link_to "Submitted URL", @assignment.submission(student).url %>
-           <% elsif @assignment.for_review?(student) %>
-             <span class="radius regular label">UP FOR REVIEW</span> |
-             <%= link_to "Submitted URL", @assignment.submission(student).url %>
-             <%= link_to "Review", edit_completed_assignment_path(student) %>
-           <% elsif @assignment.incomplete?(student) %>
-             <span class="radius alert label">NOT SUBMITTED</span>
-           <% end %>
-      </div>
-  <% end %>
-<% end %>
-<p>
-  <ul class="button-group">
-    <% if student? %>
-    <li><%= link_to 'Submit assignment', new_assignment_submission_path(@assignment.id), class: "button" %></li>
+    <% if teacher? %>
+      <h3>Students</h3>
+      <% @students.each do |student| %>
+         <div><%= student.name %> | <%= student.id %> |
+               <% s = @assignment.get_submission(student) %>
+               <% if s %>
+                 <% if s.complete? %>
+                   <span class="radius success label">COMPLETE</span> |
+                   <%= link_to "Submitted URL", s.url %>
+                 <% else %>
+                   <span class="radius regular label">UP FOR REVIEW</span> |
+                   <%= link_to "Submitted URL", s.url %>
+                   <%= link_to "Review", edit_assignment_submission_path(@assignment.id, s) %>
+                 <% end %>
+               <% else %>
+               <span class="radius alert label">NOT SUBMITTED</span>
+               <% end %>
+         </div>
+      <% end %>
     <% end %>
-    <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
-  </ul>
-</p>
+    <p>
+      <ul class="button-group">
+        <% if student? %>
+        <li><%= link_to 'Submit assignment', new_assignment_submission_path(@assignment.id), class: "button" %></li>
+        <% end %>
+        <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
+      </ul>
+    </p>
+</div>
