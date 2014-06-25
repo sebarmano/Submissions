@@ -28,20 +28,62 @@ module AssignmentsHelper
     assignment.due < DateTime.now
   end
 
-  def draw_status(assignment, student)
+  def draw_status
+    if status(assignment, student) == 'complete'
+      content_tag(:span, 'COMPLETE', class: "radius success label")
+    elsif status(assignment, student) == 'up_for_review'
+      content_tag(:span, 'UP FOR REVIEW', class: "radius regular label")
+    elsif status(assignment, student) == 'no_submission'
+      content_tag(:span, 'NO SUBMISSION', class: "radius alert label")
+    else
+      content_tag(:span, 'ERROR', class: "radius alert label")
+    end
+  end
+
+  # def link_button_status(assignment, student)
+  #   s = assignment.get_submission(student)
+  #   r = edit_assignment_submission_path(assignment.id, s)
+  #
+  #   if status(assignment, student) == 'complete'
+  #     content_tag(:div, class: "button-bar") do
+  #       content_tag(:ul, class: "button-group round") do
+  #         content_tag(:li, link_to "Submitted URL", s.url, class: "tiny button secondary")
+  #         content_tag(:li, link_to "Review", r, class: "tiny button success")
+  #       end
+  #     end
+  #
+  #
+  #   elsif status(assignment, student) == 'up_for_review'
+  #     content_tag(:div, class: "button-bar") do
+  #       content_tag(:ul, class: "button-group round") do
+  #         content_tag(:li, link_to "Submitted URL", s.url, class: "tiny button secondary")
+  #         content_tag(:li, link_to "Review", r, class: "tiny button success")
+  #       end
+  #     end
+  #   elsif status(assignment, student) == 'no_submission'
+  #   else
+  #   end
+  # end
+
+
+    end
+  def status(assignment, student)
     s = assignment.get_submission(student)
     if s
       if s.complete?
-        content_tag(:span, 'COMPLETE', class: "radius success label")
+        return 'complete'
+        # content_tag(:span, 'COMPLETE', class: "radius success label")
         # link_to "Submitted URL", s.url
         # link_to "Review", edit_assignment_submission_path(assignment.id, s)
       else
-        content_tag(:span, 'UP FOR REVIEW', class: "radius regular label")
+        return 'up_for_review'
+        # content_tag(:span, 'UP FOR REVIEW', class: "radius regular label")
         # link_to "Submitted URL", s.url
         # link_to "Review", edit_assignment_submission_path(assignment.id, s)
       end
     else
-      content_tag(:span, 'NO SUBMISSION', class: "radius alert label")
+      return 'no_submission'
+      # content_tag(:span, 'NO SUBMISSION', class: "radius alert label")
     end
 end
   

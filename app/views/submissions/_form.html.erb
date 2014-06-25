@@ -29,7 +29,7 @@
     <%= f.hidden_field :user_id, value: session[:student_id] %>
   </div>
   <div>
-    Completed to specifications? <%= f.check_box :completed %><br>
+    Completed to specifications? <%= f.check_box :complete %><br>
     <%= f.submit "Approve" %>
   </div>
   <% end %>

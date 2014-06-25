@@ -6,7 +6,7 @@
       <%= draw_status(@assignment, current_user) %>
     <% end %>
 
-      <p>
+    <p>
       <strong>Assigned:</strong>
       <%= @assignment.date.to_formatted_s(:long_ordinal) %><br>
       <strong>Due:</strong>
@@ -48,6 +48,7 @@
       <ul class="button-group">
         <% if student? %>
         <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
+        <%end%>
       </ul>
     </p>
 
