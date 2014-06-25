@@ -2,6 +2,9 @@
     <h1>
       <%= @assignment.title %>
     </h1>
+    <% if student? %>
+      <%= draw_status(@assignment, current_user) %>
+    <% end %>
 
     <p>
       <strong>Assigned:</strong>
