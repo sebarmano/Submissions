@@ -24,15 +24,9 @@
               <td><%= assignment.date %></td>
               <td><%= assignment.due %></td>
               <% if student? %>
-                <% if status(assignment)=="Up for review"%>
-                <td><span class="radius regular label">UP FOR REVIEW</span></td>
-                <% elsif status(assignment)=="Completed" %>
-                <td><span class="radius success label">COMPLETE</span></td>
-                <% elsif status(assignment)=="Incomplete" && past?(assignment) %>
-                <td><span class="radius alert label">INCOMPLETE</span></td>
-                <% else %>
-                <td><span class="radius secondary label">ACTIVE</span></td>
-                <% end %>
+                <td>
+                  <%= draw_status(assignment, current_user) %>
+                </td>
               <% end %>
               <td><%= link_to 'Show', assignment %></td>
               <% if teacher? %>
@@ -52,3 +46,4 @@
       <% end %>
     </div>
   </div>
+</div>

@@ -28,5 +28,21 @@ module AssignmentsHelper
     assignment.due < DateTime.now
   end
 
+  def draw_status(assignment, student)
+    s = assignment.get_submission(student)
+    if s
+      if s.complete?
+        content_tag(:span, 'COMPLETE', class: "radius success label")
+        # link_to "Submitted URL", s.url
+        # link_to "Review", edit_assignment_submission_path(assignment.id, s)
+      else
+        content_tag(:span, 'UP FOR REVIEW', class: "radius regular label")
+        # link_to "Submitted URL", s.url
+        # link_to "Review", edit_assignment_submission_path(assignment.id, s)
+      end
+    else
+      content_tag(:span, 'NO SUBMISSION', class: "radius alert label")
+    end
+end
   
 end

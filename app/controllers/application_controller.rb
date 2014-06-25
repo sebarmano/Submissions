@@ -38,16 +38,6 @@ class ApplicationController < ActionController::Base
     CompletedAssignment.where(user_id: session[:user_id], assignments_id: assignment.id, completed: false).any?
   end
 
-  def status(assignment)
-    if completed?(assignment)
-      return "Completed"
-    elsif for_review?(assignment)
-      return "Up for review"
-    else
-      return "Incomplete"
-    end
-  end
-
   def student_completed(student_id, assignment_id)
     CompletedAssignment.where(user_id: student_id, assignments_id: assignment_id, completed: true)
   end
