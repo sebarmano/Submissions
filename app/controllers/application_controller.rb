@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-  helper_method :current_user, :teacher?, :student?, :status,    :student_completed, :student_for_review
+  helper_method :current_user, :teacher?, :student?, :student_completed, :student_for_review
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -29,31 +29,4 @@ class ApplicationController < ActionController::Base
       redirect_to root_path, notice: "Please sign up or login"
     end
   end
-
-  def completed?(assignment)
-    CompletedAssignment.where(user_id: session[:user_id], assignments_id: assignment.id, completed: true).any?
-  end
-
-  def for_review?(assignment)
-    CompletedAssignment.where(user_id: session[:user_id], assignments_id: assignment.id, completed: false).any?
-  end
-
-  def student_completed(student_id, assignment_id)
-    CompletedAssignment.where(user_id: student_id, assignments_id: assignment_id, completed: true)
-  end
-
-  def student_for_review(student_id, assignment_id)
-    CompletedAssignment.where(user_id: student_id, assignments_id: assignment_id, completed: false)
-  end
-
-  # def student_status(student_id, assignment_id)
-  #   if student_completed?(student_id, assignment_id)
-  #     return "Completed"
-  #   elsif student_for_review?(student_id, assignment_id)
-  #     return "Up for review"
-  #   else
-  #     return "Incomplete"
-  #   end
-  # end
-
 end

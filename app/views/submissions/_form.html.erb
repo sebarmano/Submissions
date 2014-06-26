@@ -13,24 +13,28 @@
 
 
   <% if student? %>
-  <div class="field">
-    <%= f.hidden_field :user_id, value: session[:user_id] %>
-  </div>
-  <div class="field">
-    <%= f.label :url, "Github URL" %><br>
-    <%= f.url_field :url, placeholder: "Paste Github URL here" %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Submit Assignment for review" %>
-  </div>
-  <% end %>
+   <fieldset>
+     <legend>Submit Assignment for Review</legend>
+     <div class="field">
+       <%= f.hidden_field :user_id, value: session[:user_id] %>
+     </div>
+     <div class"row collapse">
+       <div class="field large-10 columns">
+         <%= f.url_field :url, placeholder: "Paste Github URL here" %>
+       </div>
+       <div class="large-2 columns">
+         <%= f.submit "Submit", class: "button postfix" %>
+       </div>
+     </div>
+     <% end %>
+   </fielset>
   <% if teacher? %>
-  <div class="field">
-    <%= f.hidden_field :user_id, value: session[:student_id] %>
-  </div>
-  <div>
-    Completed to specifications? <%= f.check_box :complete %><br>
-    <%= f.submit "Approve" %>
-  </div>
+    <div class="field">
+      <%= f.hidden_field :user_id, value: session[:student_id] %>
+    </div>
+    <div>
+      Completed to specifications? <%= f.check_box :complete %><br>
+      <%= f.submit "Approve" %>
+    </div>
   <% end %>
 <% end %>

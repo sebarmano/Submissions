@@ -43,3 +43,7 @@
  a.button  {
    color: white;
  }
+
+ a.tiny.button {
+   margin-bottom: 0px;
+ }

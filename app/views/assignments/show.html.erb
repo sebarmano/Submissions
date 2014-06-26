@@ -20,6 +20,7 @@
       <%= markdown(@assignment.description) %>
 
     <% if teacher? %>
+    <p>
       <h3>Students</h3>
 
       <table>
@@ -27,6 +28,7 @@
           <tr>
             <th>Name</th>
             <th>Status</th>
+            <th>Actions</th>
           </tr>
         </thead>
 
@@ -39,20 +41,45 @@
                <td>
                  <%= draw_status(@assignment, student) %>
                </td>
+               <td>
+                 <% if status(@assignment, student) == 'no_submission' %>
+                 <!-- <div class="button-bar"> -->
+                    <ul class="button-group round">
+                      <li><%= link_to 'Submission',
+                                "#",
+                                class: "tiny button regular disabled" %>
+                      </li>
+                      <li><%= link_to 'Review',
+                                "#",
+                                class: "tiny button success disabled" %>
+                      </li>
+                    </ul>
+                  <!-- </div> -->
+                  <% else %>
+                  <% s_assignment = @assignment.get_submission(student) %>
+                  <!-- <div class="button-bar"> -->
+                     <ul class="button-group round">
+                       <li><%= link_to 'Submission',
+                               s_assignment.url,
+                               class: "tiny button regular" %>
+                       </li>
+                       <li><%= link_to 'Review',
+                               edit_assignment_submission_path(@assignment, s_assignment),
+                               class: "tiny button success" %></li>
+                     </ul>
+                   <!-- </div> -->
+                   <% end %>
+               </td>
              </tr>
           <% end %>
         </tbody>
       </table>
+    </p>
     <% end %>
-    <p>
-      <ul class="button-group">
-        <% if student? %>
-        <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
-        <%end%>
-      </ul>
-    </p>
-
-    <p>
-      <%= render 'submissions/form' %>
-    </p>
+    <div>
+        <%= render 'submissions/form' %>
+    </div>
+    <div>
+      <%= link_to 'See all Assignments', assignments_path, class: "button" %>
+    </div>
 </div>

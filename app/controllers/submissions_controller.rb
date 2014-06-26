@@ -15,7 +15,7 @@ class SubmissionsController < ApplicationController
     if @submission.save
       redirect_to assignments_path, notice: 'Assignment was successfully submitted for review.'
     else
-      render :new
+      redirect_to assignment_path(@assignment)
     end
   end
 

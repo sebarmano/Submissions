@@ -1,4 +1,4 @@
-# Home Central
+  # Home Central
 
 This is a tracker for homeworks basically made to be use for code homeworks. The system has users that can be Teachers or Students.
 
@@ -7,5 +7,3 @@ This is a tracker for homeworks basically made to be use for code homeworks. The
 
 ## Running the App
 The app has seed data for initialize the basic features of it. Running `db:reset` in the app folder the database is created and populated. Then runing `rails server`, it is possible to see the app in **localhost:3000**.
-
-  
