@@ -14,7 +14,6 @@ class AssignmentsController < ApplicationController
   def show
     @students = User.where(teacher_id: session[:user_id])
     @submission = Submission.new
-
   end
 
   # GET /assignments/new
