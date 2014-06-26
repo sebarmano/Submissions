@@ -6,13 +6,15 @@
       <%= draw_status(@assignment, current_user) %>
     <% end %>
 
-      <p>
+    <p>
       <strong>Assigned:</strong>
       <%= @assignment.date.to_formatted_s(:long_ordinal) %><br>
       <strong>Due:</strong>
       <%= @assignment.due.to_formatted_s(:long_ordinal) %><br>
+      <% if ((@assignment.due - DateTime.now)/3600) > 0 %>
       <strong>Hours Until Due:</strong>
       <%= ((@assignment.due - DateTime.now)/3600).to_i %>
+      <% end %>
     </p>
 
       <%= markdown(@assignment.description) %>
@@ -46,7 +48,9 @@
       <ul class="button-group">
         <% if student? %>
         <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
-          <% end %>
+
+        <% end %>
+
       </ul>
     </p>
 
