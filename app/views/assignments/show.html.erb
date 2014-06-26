@@ -44,17 +44,10 @@
         </tbody>
       </table>
     <% end %>
-    <p>
-      <ul class="button-group">
-        <% if student? %>
-        <li><%= link_to 'See all Assignments', assignments_path, class: "button" %><li>
-
-        <% end %>
-
-      </ul>
-    </p>
-
-    <p>
-      <%= render 'submissions/form' %>
-    </p>
+    <div>
+        <%= render 'submissions/form' %>
+    </div>
+    <div>
+      <%= link_to 'See all Assignments', assignments_path, class: "button" %>
+    </div>
 </div>
