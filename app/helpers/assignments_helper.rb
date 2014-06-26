@@ -1,5 +1,5 @@
 module AssignmentsHelper
-    def markdown(text)
+  def markdown(text)
     options = {
         filter_html:     true,
         hard_wrap:       true,
@@ -28,7 +28,7 @@ module AssignmentsHelper
     assignment.due < DateTime.now
   end
 
-  def draw_status
+  def draw_status(assignment, student)
     if status(assignment, student) == 'complete'
       content_tag(:span, 'COMPLETE', class: "radius success label")
     elsif status(assignment, student) == 'up_for_review'
@@ -65,8 +65,6 @@ module AssignmentsHelper
   #   end
   # end
 
-
-    end
   def status(assignment, student)
     s = assignment.get_submission(student)
     if s
@@ -85,6 +83,6 @@ module AssignmentsHelper
       return 'no_submission'
       # content_tag(:span, 'NO SUBMISSION', class: "radius alert label")
     end
-end
-  
+  end
+
 end
