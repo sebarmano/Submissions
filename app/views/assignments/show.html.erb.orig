@@ -1,5 +1,4 @@
 <div class="container">
-  <div class="row">
     <h1>
       <%= @assignment.title %>
     </h1>
@@ -78,6 +77,62 @@
       <%= markdown(@assignment.description) %>
 
 
+<<<<<<< HEAD
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @students.each do |student| %>
+             <tr>
+               <td>
+                 <%= student.name %>
+               </td>
+               <td>
+                 <%= draw_status(@assignment, student) %>
+               </td>
+               <td>
+                 <% if status(@assignment, student) == 'no_submission' %>
+                 <!-- <div class="button-bar"> -->
+                    <ul class="button-group round">
+                      <li><%= link_to 'Submission',
+                                nil,
+                                class: "tiny button regular disabled" %>
+                      </li>
+                      <li><%= link_to 'Review',
+                                nil,
+                                class: "tiny button success disabled" %>
+                      </li>
+                    </ul>
+                  <!-- </div> -->
+                  <% else %>
+                  <% s_assignment = @assignment.get_submission(student) %>
+                  <!-- <div class="button-bar"> -->
+                     <ul class="button-group round">
+                       <li><%= link_to 'Submission',
+                               s_assignment.url,
+                               class: "tiny button regular" %>
+                       </li>
+                       <li><%= link_to 'Review',
+                               edit_assignment_submission_path(@assignment, s_assignment),
+                               class: "tiny button success" %></li>
+                     </ul>
+                   <!-- </div> -->
+                   <% end %>
+               </td>
+             </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </p>
+    <% end %>
+=======
+>>>>>>> ff131fd15fa7e84dfa313efb4770e0de16e4f0ba
     <div>
         <% if student? %>
         <%= render 'submissions/form' %>
@@ -86,5 +141,4 @@
     <div>
       <%= link_to 'See all Assignments', assignments_path, class: "button" %>
     </div>
-  </div>
 </div>
