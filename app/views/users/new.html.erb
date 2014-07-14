@@ -33,6 +33,10 @@
           <%= f.password_field :password_confirmation %>
         </div>
         <div class="field">
+          <%= f.label 'Teacher/Student' %><br />
+          <%= f.select :teacher, options_for_select([["Teacher", true], ["Student", false]], :teacher) %>
+        </div>
+        <div class="field">
           <%= f.label :teacher_id %><br />
           <%= f.collection_select :teacher_id, @teachers, :id, :name %>
         </div>
