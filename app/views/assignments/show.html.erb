@@ -5,6 +5,63 @@
     <% if student? %>
       <%= draw_status(@assignment, current_user) %>
     <% end %>
+<% if teacher? %>
+<p>
+  <h3>Students</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @students.each do |student| %>
+         <tr>
+           <td>
+             <%= student.name %>
+           </td>
+           <td>
+             <%= draw_status(@assignment, student) %>
+           </td>
+           <td>
+             <% if status(@assignment, student) == 'no_submission' %>
+             <!-- <div class="button-bar"> -->
+                <ul class="button-group round">
+                  <li><%= link_to 'Submission',
+                            "#",
+                            class: "tiny button regular disabled" %>
+                  </li>
+                  <li><%= link_to 'Review',
+                            "#",
+                            class: "tiny button success disabled" %>
+                  </li>
+                </ul>
+              <!-- </div> -->
+              <% else %>
+              <% s_assignment = @assignment.get_submission(student) %>
+              <!-- <div class="button-bar"> -->
+                 <ul class="button-group round">
+                   <li><%= link_to 'Submission',
+                           s_assignment.url,
+                           class: "tiny button regular" %>
+                   </li>
+                   <li><%= link_to 'Review',
+                           edit_assignment_submission_path(@assignment, s_assignment),
+                           class: "tiny button success" %></li>
+                 </ul>
+               <!-- </div> -->
+               <% end %>
+           </td>
+         </tr>
+      <% end %>
+    </tbody>
+  </table>
+</p>
+<% end %>
 
     <p>
       <strong>Assigned:</strong>
@@ -19,65 +76,11 @@
 
       <%= markdown(@assignment.description) %>
 
-    <% if teacher? %>
-    <p>
-      <h3>Students</h3>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% @students.each do |student| %>
-             <tr>
-               <td>
-                 <%= student.name %>
-               </td>
-               <td>
-                 <%= draw_status(@assignment, student) %>
-               </td>
-               <td>
-                 <% if status(@assignment, student) == 'no_submission' %>
-                 <!-- <div class="button-bar"> -->
-                    <ul class="button-group round">
-                      <li><%= link_to 'Submission',
-                                "#",
-                                class: "tiny button regular disabled" %>
-                      </li>
-                      <li><%= link_to 'Review',
-                                "#",
-                                class: "tiny button success disabled" %>
-                      </li>
-                    </ul>
-                  <!-- </div> -->
-                  <% else %>
-                  <% s_assignment = @assignment.get_submission(student) %>
-                  <!-- <div class="button-bar"> -->
-                     <ul class="button-group round">
-                       <li><%= link_to 'Submission',
-                               s_assignment.url,
-                               class: "tiny button regular" %>
-                       </li>
-                       <li><%= link_to 'Review',
-                               edit_assignment_submission_path(@assignment, s_assignment),
-                               class: "tiny button success" %></li>
-                     </ul>
-                   <!-- </div> -->
-                   <% end %>
-               </td>
-             </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </p>
-    <% end %>
     <div>
+        <% if student? %>
         <%= render 'submissions/form' %>
+        <% end %>
     </div>
     <div>
       <%= link_to 'See all Assignments', assignments_path, class: "button" %>
