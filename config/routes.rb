@@ -4,12 +4,9 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#destroy', as: 'logout'
   post 'sessions', to: 'sessions#create', as: 'sessions'
   resources :users
-  resources :completed_assignments
   resources :assignments do
     resources :submissions
   end
-
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
