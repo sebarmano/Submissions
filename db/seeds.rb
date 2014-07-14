@@ -8,7 +8,7 @@
 
 
 User.create(
-  name: "I'm a teacher",
+  name: "none",
   email: "example@example.com",
   password: "teacher",
   password_confirmation: "teacher",
