@@ -1,5 +1,7 @@
   # Home Central
 
+[![Code Climate](https://codeclimate.com/github/sebarmano/Submissions.png)](https://codeclimate.com/github/sebarmano/Submissions)
+
 This is a tracker for homeworks basically made to be use for code homeworks. The system has users that can be Teachers or Students.
 
 - Teachers can create, edit and delete homeworks (assignments), and can review and approve students' submitted code.
