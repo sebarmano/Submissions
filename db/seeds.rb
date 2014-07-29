@@ -85,18 +85,3 @@ Assignment.create(
     due: DateTime.tomorrow + (i - 3).days
   )
 end
-
-
-CompletedAssignment.create(
-  user_id: 5,
-  assignments_id: 1,
-  url: "https://github.com/sebarmano/tracker",
-  completed: true
-)
-
-CompletedAssignment.create(
-  user_id: 5,
-  assignments_id: 3,
-  url: "https://github.com/sebarmano/tracker",
-  completed: false
-)

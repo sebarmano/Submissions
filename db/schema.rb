@@ -22,18 +22,6 @@ ActiveRecord::Schema.define(version: 20140714203616) do
     t.datetime "updated_at"
   end
 
-  create_table "completed_assignments", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "assignments_id"
-    t.string   "url"
-    t.boolean  "completed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "completed_assignments", ["assignments_id"], name: "index_completed_assignments_on_assignments_id"
-  add_index "completed_assignments", ["user_id"], name: "index_completed_assignments_on_user_id"
-
   create_table "submissions", force: true do |t|
     t.integer  "user_id"
     t.integer  "assignment_id"
